@@ -1,0 +1,38 @@
+[package]
+name        = "axonos-swarm"
+version     = "0.1.0"
+edition     = "2021"
+rust-version = "1.85"
+authors     = ["Denis Yermakou <denis@axonos.org>"]
+license     = "Apache-2.0 OR MIT"
+description = "Distributed real-time coordination for AxonOS mesh nodes — Neural PTP clock synchronisation, swarm scheduling, and fault detection."
+repository  = "https://github.com/AxonOS-org/axonos-swarm"
+homepage    = "https://axonos.org"
+keywords    = ["bci", "real-time", "no-std", "embedded", "mesh"]
+categories  = ["embedded", "no-std", "science"]
+readme      = "README.md"
+exclude     = [".github/", "*.orig"]
+
+[features]
+default  = []
+std      = []           # enables std-dependent utilities (Display impls, etc.)
+defmt    = ["dep:defmt"] # structured logging for embedded targets
+
+[dependencies]
+defmt = { version = "0.3", optional = true }
+
+[dev-dependencies]
+# property-based testing
+proptest = "1"
+
+[[example]]
+name = "two_node_sync"
+required-features = ["std"]
+
+[profile.release]
+opt-level = "s"   # size-optimised for Cortex-M flash constraints
+lto       = true
+codegen-units = 1
+
+[profile.dev]
+opt-level = 1     # enough optimisation for embedded tests
