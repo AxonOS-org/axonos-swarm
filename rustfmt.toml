@@ -1,0 +1,13 @@
+# axonos-swarm rustfmt configuration.
+# Locked to match axonos-kernel and axonos-sdk workspaces — uniform style
+# across the AxonOS ecosystem so contributors don't see noise diffs when
+# they move between repos.
+
+edition = "2021"
+max_width = 100
+hard_tabs = false
+tab_spaces = 4
+newline_style = "Unix"
+use_small_heuristics = "Default"
+reorder_imports = true
+reorder_modules = true

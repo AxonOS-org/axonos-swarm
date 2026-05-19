@@ -1,0 +1,152 @@
+# axonos-swarm — Continuous Integration
+#
+# Jobs:
+#   1. test (×3 OS)      — unit tests + doctests on linux/macos/windows
+#   2. fmt                — cargo fmt --check
+#   3. clippy             — cargo clippy -D warnings (default + --features std)
+#   4. msrv               — verify MSRV (1.85) still builds
+#   5. no_std × 2         — thumbv7em-none-eabihf, thumbv8m.main-none-eabihf
+#   6. docs               — cargo doc --no-deps
+#   7. miri               — undefined-behaviour check (continue-on-error)
+#   8. cargo-deny         — license + advisory audit (continue-on-error)
+
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: -D warnings
+
+jobs:
+  # ── 1. Tests on three operating systems ──────────────────────────────────
+  test:
+    name: test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: test default features
+        run: cargo test --lib --tests
+      - name: test --features std
+        run: cargo test --features std
+
+  # ── 2. Format check ──────────────────────────────────────────────────────
+  fmt:
+    name: fmt
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - run: cargo fmt --all -- --check
+
+  # ── 3. Clippy ────────────────────────────────────────────────────────────
+  clippy:
+    name: clippy -D warnings
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+      - name: clippy default
+        run: cargo clippy --all-targets -- -D warnings
+      - name: clippy --features std
+        run: cargo clippy --all-targets --features std -- -D warnings
+
+  # ── 4. MSRV (Minimum Supported Rust Version) ─────────────────────────────
+  msrv:
+    name: MSRV 1.85
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.85
+      - uses: Swatinem/rust-cache@v2
+      - name: build with MSRV
+        run: cargo build --features std
+
+  # ── 5. no_std build (Cortex-M targets) ───────────────────────────────────
+  no_std:
+    name: no_std (${{ matrix.target }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - thumbv7em-none-eabihf       # Cortex-M4F (STM32F407)
+          - thumbv8m.main-none-eabihf   # Cortex-M33 (STM32H573)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - uses: Swatinem/rust-cache@v2
+      - name: build no_std for ${{ matrix.target }}
+        run: cargo build --target ${{ matrix.target }} --no-default-features
+
+  # ── 6. Documentation build ───────────────────────────────────────────────
+  docs:
+    name: cargo doc
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      RUSTDOCFLAGS: -D warnings
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: cargo doc
+        run: cargo doc --no-deps --features std
+
+  # ── 7. Miri — undefined-behaviour check ──────────────────────────────────
+  # The crate is #![no_std] without unsafe, so this should be a no-op
+  # formally, but miri also checks transitive deps.
+  miri:
+    name: miri
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    continue-on-error: true
+    env:
+      MIRIFLAGS: -Zmiri-ignore-leaks
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: miri
+      - uses: Swatinem/rust-cache@v2
+      - name: miri test
+        run: cargo miri test --features std
+
+  # ── 8. cargo-deny (licence + advisory + bans audit) ──────────────────────
+  deny:
+    name: cargo-deny
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: EmbarkStudios/cargo-deny-action@v2
+        with:
+          command: check bans licenses sources

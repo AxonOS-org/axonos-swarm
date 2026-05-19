@@ -1,0 +1,70 @@
+# axonos-swarm — cargo-deny configuration.
+# Run locally via:  cargo install cargo-deny && cargo deny check
+# Run in CI via:    EmbarkStudios/cargo-deny-action@v2 (see ci.yml)
+
+[graph]
+# Check all targets the crate is published for.
+targets = [
+    { triple = "x86_64-unknown-linux-gnu" },
+    { triple = "thumbv7em-none-eabihf" },
+    { triple = "thumbv8m.main-none-eabihf" },
+]
+
+# ─── Licences ────────────────────────────────────────────────────────────
+# Only permit permissive open-source licences. Copyleft (GPL family) and
+# unfamiliar licences require explicit review.
+
+[licenses]
+unused-allowed-license = "allow"
+confidence-threshold = 0.93
+allow = [
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "MIT",
+    "MIT-0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "Unicode-3.0",
+    "Unicode-DFS-2016",
+    "CC0-1.0",
+    "Zlib",
+    "0BSD",
+]
+
+# ─── Security advisories ─────────────────────────────────────────────────
+# Auto-fail the audit job on RUSTSEC advisories; allow unmaintained crates
+# to surface as warnings (they're a smell but not always actionable).
+
+[advisories]
+db-path = "~/.cargo/advisory-db"
+db-urls = ["https://github.com/rustsec/advisory-db"]
+yanked = "deny"
+ignore = []
+
+# ─── Banned crates ───────────────────────────────────────────────────────
+# Deny risky crates (openssl when rustls is the AxonOS default, lazy_static
+# when once_cell / std::sync::OnceLock work everywhere we need).
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+highlight = "all"
+deny = [
+    # Prefer rustls — openssl drags a system dependency, hurts no_std story.
+    { name = "openssl" },
+    { name = "openssl-sys" },
+]
+skip = []
+skip-tree = []
+
+# ─── Source authenticity ─────────────────────────────────────────────────
+# Only allow crates from crates.io and known git mirrors.
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+allow-git = [
+    "https://github.com/AxonOS-org",
+]

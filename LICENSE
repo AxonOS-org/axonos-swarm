@@ -1,21 +1,53 @@
-MIT License
+AxonOS Swarm — Dual Licence
+============================
 
-Copyright (c) 2026 AxonOS
+This software is dual-licensed under your choice of either:
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+  * Apache License, Version 2.0
+    (see LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0)
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+  * MIT License
+    (see LICENSE-MIT or http://opensource.org/licenses/MIT)
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+at your option.
+
+This is the standard dual-licence model used across the Rust ecosystem.
+You may pick whichever licence is most convenient for your use case;
+the two are compatible with virtually all open-source and commercial
+distribution scenarios.
+
+For the SPDX expression governing the published crate, see the
+`license` field in Cargo.toml:
+
+    license = "Apache-2.0 OR MIT"
+
+────────────────────────────────────────────────────────────────────
+Contributions
+────────────────────────────────────────────────────────────────────
+
+Unless you explicitly state otherwise, any contribution intentionally
+submitted for inclusion in this project by you, as defined in the
+Apache-2.0 licence, shall be dual-licensed as above, without any
+additional terms or conditions.
+
+────────────────────────────────────────────────────────────────────
+Trademark
+────────────────────────────────────────────────────────────────────
+
+"AxonOS" is an unregistered word mark of Denis Yermakou. The licences
+above grant you rights to the source code and its derivatives; they do
+NOT grant trademark rights.
+
+You may state factually that your software is "based on AxonOS" or
+"derived from axonos-swarm". You may NOT use the name "AxonOS" in a
+manner that implies endorsement of, or affiliation with, the upstream
+project for modified or derivative software.
+
+────────────────────────────────────────────────────────────────────
+Contact
+────────────────────────────────────────────────────────────────────
+
+Project website:   https://axonos.org
+GitHub:            https://github.com/AxonOS-org
+Maintainer:        Denis Yermakou <denis@axonos.org>
+Security:          security@axonos.org
