@@ -185,14 +185,15 @@ impl SwarmFaultDetector {
         let mut report = SwarmHealthReport::new(current_epoch);
 
         for slot in self.peers.iter_mut().flatten() {
-            let received_this_epoch =
-                received.iter().any(|(id, _)| *id == slot.node_id);
+            let received_this_epoch = received.iter().any(|(id, _)| *id == slot.node_id);
 
             if !received_this_epoch {
                 // --- Type 1: Silence detection ---
                 slot.state = match slot.state {
                     NodeHealthState::Healthy | NodeHealthState::Degraded { .. } => {
-                        NodeHealthState::Silent { last_seen_epoch: current_epoch.saturating_sub(1) }
+                        NodeHealthState::Silent {
+                            last_seen_epoch: current_epoch.saturating_sub(1),
+                        }
                     }
                     NodeHealthState::Silent { last_seen_epoch } => {
                         let silent_epochs = current_epoch.saturating_sub(last_seen_epoch);
@@ -227,7 +228,9 @@ impl SwarmFaultDetector {
             if let Some(slot) = self.find_peer_mut(*node_id) {
                 if latency_us > DEGRADED_LATENCY_THRESHOLD_US {
                     let excess = (latency_us - 972).min(u32::MAX as u64) as u32;
-                    slot.state = NodeHealthState::Degraded { latency_excess_us: excess };
+                    slot.state = NodeHealthState::Degraded {
+                        latency_excess_us: excess,
+                    };
                     report.add_alert(SwarmAlert::NodeDegraded {
                         node: *node_id,
                         latency_us,
@@ -265,7 +268,10 @@ impl SwarmFaultDetector {
     }
 
     fn find_peer_mut(&mut self, node_id: NodeId) -> Option<&mut PeerSlot> {
-        self.peers.iter_mut().flatten().find(|s| s.node_id == node_id)
+        self.peers
+            .iter_mut()
+            .flatten()
+            .find(|s| s.node_id == node_id)
     }
 
     /// Simple majority-vote Byzantine check.
@@ -316,13 +322,16 @@ mod tests {
 
     fn make_packet(node_id: NodeId, epoch: u64, latency_us: u64) -> (NodeId, IntentPacket) {
         let sent = 1_000_000_u64;
-        (node_id, IntentPacket {
-            intent: IntentKind::Navigation(Direction::Left),
-            sent_global_us: sent,
-            arrival_local_us: sent + latency_us,
+        (
             node_id,
-            epoch,
-        })
+            IntentPacket {
+                intent: IntentKind::Navigation(Direction::Left),
+                sent_global_us: sent,
+                arrival_local_us: sent + latency_us,
+                node_id,
+                epoch,
+            },
+        )
     }
 
     #[test]
@@ -363,9 +372,10 @@ mod tests {
         det.assess(1, &[]);
         // Epoch 2: still silent → silent_epochs = 2 → NodeDead
         let report = det.assess(2, &[]);
-        let has_dead = report.alerts().iter().any(|a| {
-            matches!(a, Some(SwarmAlert::NodeDead { .. }))
-        });
+        let has_dead = report
+            .alerts()
+            .iter()
+            .any(|a| matches!(a, Some(SwarmAlert::NodeDead { .. })));
         assert!(has_dead);
     }
 

@@ -9,7 +9,7 @@
 //! ## Contract SC2 — Synchronised Start
 //!
 //! Each node starts its pipeline at local time corresponding to the global
-//! swarm epoch t_start[k], with skew ≤ 2 × σ_sync ≤ 100 µs.
+//! swarm epoch t_start\[k\], with skew ≤ 2 × σ_sync ≤ 100 µs.
 //!
 //! ## Contract SC3 — Intent Co-availability
 //!
@@ -131,7 +131,7 @@ impl SwarmScheduler {
         let delta_start = 2.0 * sigma_sync;
         // Conservative: WCRT spread 222 µs (from Article #36)
         let wcrt_spread = 222.0_f64;
-        Some((wcrt_spread + delta_start).ceil() as u64)
+        Some(libm::ceil(wcrt_spread + delta_start) as u64)
     }
 }
 
@@ -144,7 +144,10 @@ mod tests {
         let mut sched = SwarmScheduler::new(0);
         let now = 10_000_u64; // 10 ms
         let next = sched.next_epoch_start_local_us(now);
-        assert!(next >= now, "next epoch must be in the future: next={next}, now={now}");
+        assert!(
+            next >= now,
+            "next epoch must be in the future: next={next}, now={now}"
+        );
     }
 
     #[test]

@@ -6,9 +6,7 @@
 //! Run with: cargo run --example two_node_sync --features std
 
 use axonos_swarm::{
-    fault::SwarmFaultDetector,
-    swarm::SwarmScheduler,
-    Direction, IntentKind, IntentPacket, NodeId,
+    fault::SwarmFaultDetector, swarm::SwarmScheduler, Direction, IntentKind, IntentPacket, NodeId,
 };
 
 fn main() {
@@ -74,20 +72,26 @@ fn main() {
 
     // Simulate intent packets from both nodes
     let packets = vec![
-        (node_a, IntentPacket {
-            intent: IntentKind::Navigation(Direction::Left),
-            sent_global_us: 972,
-            arrival_local_us: 972 + 900, // 900 µs transport
-            node_id: node_a,
-            epoch: 0,
-        }),
-        (node_b, IntentPacket {
-            intent: IntentKind::Navigation(Direction::Right),
-            sent_global_us: 972,
-            arrival_local_us: 972 + 850, // 850 µs transport
-            node_id: node_b,
-            epoch: 0,
-        }),
+        (
+            node_a,
+            IntentPacket {
+                intent: IntentKind::Navigation(Direction::Left),
+                sent_global_us: 972,
+                arrival_local_us: 972 + 900, // 900 µs transport
+                node_id: node_a,
+                epoch: 0,
+            },
+        ),
+        (
+            node_b,
+            IntentPacket {
+                intent: IntentKind::Navigation(Direction::Right),
+                sent_global_us: 972,
+                arrival_local_us: 972 + 850, // 850 µs transport
+                node_id: node_b,
+                epoch: 0,
+            },
+        ),
     ];
 
     let report = detector.assess(0, &packets);
