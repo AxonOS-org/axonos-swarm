@@ -19,6 +19,7 @@ std = []                       # enables std-dependent utilities (Display impls,
 defmt = ["dep:defmt"]          # structured logging for embedded targets
 
 [dependencies]
+libm = "0.2"
 defmt = { version = "0.3", optional = true }
 
 [dev-dependencies]

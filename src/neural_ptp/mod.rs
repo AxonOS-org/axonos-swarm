@@ -164,7 +164,7 @@ impl NeuralPtpKalman {
     /// SC0 requires this value ≤ 50 µs for normal operation.
     #[inline]
     pub fn offset_uncertainty_3sigma_us(&self) -> f64 {
-        3.0 * self.cov[0][0].abs().sqrt()
+        3.0 * libm::sqrt(self.cov[0][0].abs())
     }
 
     /// Synchronisation quality score: 0.0 (poor) to 1.0 (excellent).

@@ -144,7 +144,10 @@ mod tests {
         let mut sched = SwarmScheduler::new(0);
         let now = 10_000_u64; // 10 ms
         let next = sched.next_epoch_start_local_us(now);
-        assert!(next >= now, "next epoch must be in the future: next={next}, now={now}");
+        assert!(
+            next >= now,
+            "next epoch must be in the future: next={next}, now={now}"
+        );
     }
 
     #[test]
