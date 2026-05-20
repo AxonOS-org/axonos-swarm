@@ -120,8 +120,9 @@ jobs:
         run: cargo doc --no-deps --features std
 
   # ── 7. Miri — undefined-behaviour check ──────────────────────────────────
-  # The crate is #![no_std] without unsafe, so this should be a no-op
-  # formally, but miri also checks transitive deps.
+  # Miri checks UB-sensitive code paths. Numeric Kalman convergence tests
+  # are exercised by cargo test and skipped here because they rely on
+  # float/libm behaviour rather than unsafe-code invariants.
   miri:
     name: miri
     runs-on: ubuntu-latest
@@ -136,7 +137,14 @@ jobs:
           components: miri
       - uses: Swatinem/rust-cache@v2
       - name: miri test
-        run: cargo miri test --features std
+        run: >
+          cargo miri test --features std --lib --
+          --skip neural_ptp::tests::converges_after_300_measurements
+          --skip neural_ptp::tests::quality_high_when_converged
+          --skip neural_ptp::tests::quality_low_when_noisy
+          --skip neural_ptp::tests::predict_increases_uncertainty
+          --skip swarm::tests::co_availability_none_when_unsynced
+          --skip swarm::tests::co_availability_some_when_converged
 
   # ── 8. cargo-deny (licence + advisory + bans audit) ──────────────────────
   deny:
