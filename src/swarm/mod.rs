@@ -131,7 +131,7 @@ impl SwarmScheduler {
         let delta_start = 2.0 * sigma_sync;
         // Conservative: WCRT spread 222 µs (from Article #36)
         let wcrt_spread = 222.0_f64;
-        Some((wcrt_spread + delta_start).ceil() as u64)
+        Some(libm::ceil(wcrt_spread + delta_start) as u64)
     }
 }
 
