@@ -83,20 +83,23 @@ impl NeuralPtpKalman {
     /// ω_{k|k-1} = ω_{k-1}                           (drift assumed constant)
     /// ```
     pub fn predict(&mut self, dt_s: f64) {
-        let dt_us = dt_s * 1e6_f64;
+        // Drift is stored in ppm, i.e. microseconds of offset per second.
+        // Therefore the state transition uses seconds, not microseconds.
+        let dt = dt_s;
 
         // Predicted state
-        let theta_pred = self.state[0] + self.state[1] * dt_us;
+        let theta_pred = self.state[0] + self.state[1] * dt;
         let omega_pred = self.state[1];
 
-        // F = [[1, dt_us], [0, 1]]
+        // F = [[1, dt], [0, 1]]
         // P_{k|k-1} = F P F^T + Q
         let p00 = self.cov[0][0]
-            + dt_us * (self.cov[0][1] + self.cov[1][0])
-            + dt_us * dt_us * self.cov[1][1]
+            + dt * (self.cov[0][1] + self.cov[1][0])
+            + dt * dt * self.cov[1][1]
             + self.q[0][0];
-        let p01 = self.cov[0][1] + dt_us * self.cov[1][1] + self.q[0][1];
-        let p10 = self.cov[1][0] + dt_us * self.cov[1][1] + self.q[1][0];
+
+        let p01 = self.cov[0][1] + dt * self.cov[1][1] + self.q[0][1];
+        let p10 = self.cov[1][0] + dt * self.cov[1][1] + self.q[1][0];
         let p11 = self.cov[1][1] + self.q[1][1];
 
         self.state = [theta_pred, omega_pred];
@@ -127,13 +130,17 @@ impl NeuralPtpKalman {
         self.state[0] += k0 * innov;
         self.state[1] += k1 * innov;
 
-        // Covariance update: P = (I - KH)P
-        // Row 0: P[0][j] = (1 - k0) * P[0][j]
-        self.cov[0][0] *= 1.0 - k0;
-        self.cov[0][1] *= 1.0 - k0;
-        // Row 1: P[1][j] = P[1][j] - k1 * P[0][j]
-        self.cov[1][0] -= k1 * self.cov[0][0];
-        self.cov[1][1] -= k1 * self.cov[0][1];
+        // Covariance update: P = (I - KH)P.
+        // Keep the old covariance values; row 1 must not use already-mutated row 0.
+        let p00 = self.cov[0][0];
+        let p01 = self.cov[0][1];
+        let p10 = self.cov[1][0];
+        let p11 = self.cov[1][1];
+
+        self.cov[0][0] = (1.0 - k0) * p00;
+        self.cov[0][1] = (1.0 - k0) * p01;
+        self.cov[1][0] = p10 - k1 * p00;
+        self.cov[1][1] = p11 - k1 * p01;
     }
 
     /// Best estimate of the current clock offset (µs).
