@@ -87,7 +87,6 @@ impl NeuralPtpKalman {
         // Therefore the state transition uses seconds, not microseconds.
         let dt = dt_s;
 
-        // Predicted state.
         let theta_pred = self.state[0] + self.state[1] * dt;
         let omega_pred = self.state[1];
 
