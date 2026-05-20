@@ -83,11 +83,11 @@ impl NeuralPtpKalman {
     /// ω_{k|k-1} = ω_{k-1}                           (drift assumed constant)
     /// ```
     pub fn predict(&mut self, dt_s: f64) {
-        // Drift is stored in ppm, i.e. microseconds of offset per second.
+        // Drift is stored in ppm: microseconds of offset per second.
         // Therefore the state transition uses seconds, not microseconds.
         let dt = dt_s;
 
-        // Predicted state
+        // Predicted state.
         let theta_pred = self.state[0] + self.state[1] * dt;
         let omega_pred = self.state[1];
 
