@@ -9,7 +9,7 @@
 //! ## Contract SC2 — Synchronised Start
 //!
 //! Each node starts its pipeline at local time corresponding to the global
-//! swarm epoch t_start[k], with skew ≤ 2 × σ_sync ≤ 100 µs.
+//! swarm epoch t_start\[k\], with skew ≤ 2 × σ_sync ≤ 100 µs.
 //!
 //! ## Contract SC3 — Intent Co-availability
 //!
