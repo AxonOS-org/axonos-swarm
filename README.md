@@ -5,7 +5,7 @@
 ![License](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue)
 ![Status](https://img.shields.io/badge/status-experimental-lightgrey)
 
-**Experimental real-time coordination layer for AxonOS mesh nodes.**
+**Real-time coordination layer for AxonOS mesh nodes.**
 
 `axonos-swarm` extends AxonOS from a single deterministic BCI node to a
 small distributed mesh of real-time nodes. It provides clock synchronisation,
@@ -13,7 +13,7 @@ synchronised epoch release, co-availability window estimation, and bounded
 fault detection for distributed BCI pipelines.
 
 This repository is not an AI-agent swarm, not a consensus system, and not a
-clinical deployment baseline. It is a low-level experimental Rust crate for
+clinical deployment baseline. It is a low-level validation-oriented Rust crate for
 testing whether AxonOS timing guarantees can be lifted from one node to N
 coordinated nodes.
 
@@ -206,7 +206,7 @@ This repository does **not** claim:
 
 The intended claim is narrower:
 
-> `axonos-swarm` is an experimental `no_std` Rust crate for studying real-time
+> `axonos-swarm` is an `no_std` Rust crate for studying real-time
 > coordination, synchronised epoch release, and peer health monitoring across
 > AxonOS mesh nodes.
 
@@ -224,13 +224,13 @@ question:
 > constraints are required for a group of nodes to act as one coordinated BCI
 > mesh?
 
-The answer is expressed as the experimental SC0–SC6 swarm contract.
+The answer is expressed as the SC0–SC6 swarm real-time contract.
 
 ---
 
 ## Repository status
 
-This repository is public and experimental.
+This repository is public and pre-certification.
 
 Recommended interpretation:
 
