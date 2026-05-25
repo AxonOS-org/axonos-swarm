@@ -3,7 +3,7 @@
 [![CI](https://github.com/AxonOS-org/axonos-swarm/actions/workflows/ci.yml/badge.svg)](https://github.com/AxonOS-org/axonos-swarm/actions/workflows/ci.yml)
 ![Rust](https://img.shields.io/badge/rust-no_std-orange)
 ![License](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue)
-![Status](https://img.shields.io/badge/status-experimental-lightgrey)
+![Status](https://img.shields.io/badge/status-pre--certification-blue)
 
 **Real-time coordination layer for AxonOS mesh nodes.**
 
@@ -80,8 +80,7 @@ AxonOS distinguishes between claims by evidence level:
 | L2 | Runtime measurement on a development fixture or controlled harness |
 | L3 | External instrumentation, GPIO/oscilloscope trace, or independent validation |
 
-Current status: `axonos-swarm` should be read as **L1/L2-oriented experimental
-infrastructure**. It is not yet an L3-validated distributed BCI runtime.
+Current status: `axonos-swarm` should be read as **L1/L2-oriented validation infrastructure**. It is not yet an L3-validated distributed BCI runtime.
 
 ---
 
