@@ -1,9 +1,11 @@
 # axonos-swarm
 
 [![CI](https://github.com/AxonOS-org/axonos-swarm/actions/workflows/ci.yml/badge.svg)](https://github.com/AxonOS-org/axonos-swarm/actions/workflows/ci.yml)
-![Rust](https://img.shields.io/badge/rust-no_std-orange)
-![License](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue)
-![Status](https://img.shields.io/badge/status-pre--certification-blue)
+[![Crate](https://img.shields.io/badge/Crate-v0.2.1-0a4a8f?style=flat-square)](https://github.com/AxonOS-org/axonos-swarm/releases/tag/v0.2.1)
+[![Rust](https://img.shields.io/badge/Rust-no__std-CE422B?style=flat-square&logo=rust&logoColor=white)](https://www.rust-lang.org/)
+[![License](https://img.shields.io/badge/License-Apache--2.0%20OR%20MIT-475569?style=flat-square)](#license)
+[![Status](https://img.shields.io/badge/Status-Pre--certification-475569?style=flat-square)](#repository-status)
+[![Standard](https://img.shields.io/badge/Standard-v1.0.0-0a4a8f?style=flat-square)](https://github.com/AxonOS-org/axonos-standard)
 
 **Real-time coordination layer for AxonOS mesh nodes.**
 
@@ -29,8 +31,9 @@ Within that architecture:
 
 | Layer | Repository | Role |
 |---|---|---|
+| Canonical standard | [`axonos-standard`](https://github.com/AxonOS-org/axonos-standard) | Architecture manual, conformance criteria, validation taxonomy |
+| Engineering RFCs | [`axonos-rfcs`](https://github.com/AxonOS-org/axonos-rfcs) | Numbered design proposals; normative once finalised |
 | Kernel substrate | [`axonos-kernel`](https://github.com/AxonOS-org/axonos-kernel) | EDF scheduling, SPSC IPC, capability gate, monotonic time |
-| Specifications | [`axonos-rfcs`](https://github.com/AxonOS-org/axonos-rfcs) | Engineering RFCs and validation taxonomy |
 | Application boundary | [`axonos-sdk`](https://github.com/AxonOS-org/axonos-sdk) | Typed intents, manifests, ABI-compatible integration |
 | Consent layer | [`axonos-consent`](https://github.com/AxonOS-org/axonos-consent) | Deterministic consent state machine and stimulation-gating protocol |
 | Mesh coordination | **`axonos-swarm`** | Distributed timing, co-availability, and peer health monitoring |
@@ -270,9 +273,19 @@ Near-term engineering work:
 
 Dual-licensed under either:
 
-- Apache License, Version 2.0
-- MIT License
+- Apache License, Version 2.0 — see [`LICENSE-APACHE`](./LICENSE-APACHE)
+- MIT License — see [`LICENSE-MIT`](./LICENSE-MIT)
 
-at your option.
+at your option. See [`LICENSE`](./LICENSE) for the full dispatcher and trademark notice.
 
-© 2026 Denis Yermakou · [axonos.org](https://axonos.org) · [connect@axonos.org](mailto:connect@axonos.org)
+---
+
+<div align="center">
+
+**The AxonOS Project** &nbsp;·&nbsp; [axonos.org](https://axonos.org) &nbsp;·&nbsp; [connect@axonos.org](mailto:connect@axonos.org) &nbsp;·&nbsp; [security@axonos.org](mailto:security@axonos.org)
+
+<sub>Singapore · Zurich · Berlin · Milano · San Mateo</sub>
+
+<sub>© 2026 Denis Yermakou · `axonos-swarm` v0.2.1</sub>
+
+</div>

@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+title: "AxonOS Swarm"
+message: >-
+  If you reference or build against this component of the AxonOS
+  project, please cite it using the metadata below. The canonical
+  specification is the axonos-standard repository.
+type: software
+authors:
+  - given-names: Denis
+    family-names: Yermakou
+    affiliation: "AxonOS Project"
+repository-code: "https://github.com/AxonOS-org/axonos-swarm"
+url: "https://axonos.org"
+abstract: >-
+  An experimental real-time coordination layer for AxonOS mesh nodes:
+  Kalman-filtered Neural PTP clock synchronisation, synchronised epoch
+  scheduling, co-availability window estimation, and bounded fault
+  detection. Implements the Swarm Real-Time Contract SC0–SC6 defined in
+  AxonOS RFC-0008. no_std Rust on ARM Cortex-M.
+keywords:
+  - brain-computer interface
+  - real-time systems
+  - distributed systems
+  - clock synchronisation
+  - operating system
+  - neurotechnology
+  - rust
+license: [Apache-2.0, MIT]
+version: "0.2.1"
+date-released: "2026-05-27"

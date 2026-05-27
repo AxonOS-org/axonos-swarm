@@ -6,6 +6,46 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [v0.2.1] — 2026-05-27
+
+Polish release. No source-code or API changes — v0.2.0 source is preserved
+byte-identical. This release brings the repository up to the unified AxonOS
+visual and documentation standard applied across the organisation.
+
+### Added
+
+- **`CITATION.cff`** — machine-readable citation metadata; GitHub renders the
+  "Cite this repository" button from it.
+- **`SECURITY.md`** — vulnerability-disclosure policy mirroring the policy used
+  in `axonos-standard` and the AxonOS Project entry-point repository.
+
+### Changed
+
+- **README badge palette** — aligned to the canonical AxonOS palette: AxonOS
+  blue `#0a4a8f` for versioned artefacts (Crate v0.2.1, Standard v1.0.0), Rust
+  canonical orange `#CE422B`, slate `#475569` for licence and status. Replaces
+  the previous generic `orange`/`blue` placeholder colours.
+- **README stack table** — adds the missing `axonos-standard` row at the top
+  (canonical normative spec) and separates `axonos-rfcs` onto its own row
+  (engineering proposals). The full AxonOS stack is now visible from this
+  repository's landing page.
+- **README footer** — replaced ad-hoc copyright line with the canonical
+  centered AxonOS footer block (project name, contacts, five-city locator).
+- **Author email** — `denis@axonos.org` (personal) → `connect@axonos.org`
+  (project-canonical) in `Cargo.toml` and `LICENSE`. The project's general
+  contact is `connect@axonos.org` going forward; `security@axonos.org` remains
+  the security disclosure address.
+
+### Notes
+
+- **Source-code unchanged.** All v0.2.0 APIs (`NeuralPtpKalman`, `SwarmScheduler`,
+  `SwarmFaultDetector`) work as before. Wire format and SC0–SC6 contract bounds
+  byte-identical.
+- **Patch bump 0.2.0 → 0.2.1** per SemVer — purely additive, no breaking changes,
+  no new dependency.
+
+---
+
 ## [v0.2.0] — 2026-05-19
 
 Infrastructure release. No source-code or API changes — the v0.1.0 implementation
@@ -109,5 +149,6 @@ and [Article #36](https://medium.com/@AxonOS):
 
 ---
 
+[v0.2.1]: https://github.com/AxonOS-org/axonos-swarm/releases/tag/v0.2.1
 [v0.2.0]: https://github.com/AxonOS-org/axonos-swarm/releases/tag/v0.2.0
 [v0.1.0]: https://github.com/AxonOS-org/axonos-swarm/releases/tag/v0.1.0

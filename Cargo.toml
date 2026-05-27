@@ -1,9 +1,9 @@
 [package]
 name = "axonos-swarm"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 rust-version = "1.85"
-authors = ["Denis Yermakou <denis@axonos.org>"]
+authors = ["Denis Yermakou <connect@axonos.org>"]
 license = "Apache-2.0 OR MIT"
 description = "Distributed real-time coordination for AxonOS mesh nodes — Neural PTP clock synchronisation, swarm scheduling, and fault detection."
 repository = "https://github.com/AxonOS-org/axonos-swarm"
