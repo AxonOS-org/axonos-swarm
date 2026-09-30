@@ -284,8 +284,6 @@ at your option. See [`LICENSE`](./LICENSE) for the full dispatcher and trademark
 
 **The AxonOS Project** &nbsp;·&nbsp; [axonos.org](https://axonos.org) &nbsp;·&nbsp; [connect@axonos.org](mailto:connect@axonos.org) &nbsp;·&nbsp; [security@axonos.org](mailto:security@axonos.org)
 
-<sub>Singapore · Zurich · Berlin · Milano · San Mateo</sub>
-
 <sub>© 2026 Denis Yermakou · `axonos-swarm` v0.2.1</sub>
 
 </div>
