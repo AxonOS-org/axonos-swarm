@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0 OR MIT
+// SPDX-FileCopyrightText: 2026 Denis Yermakou <connect@axonos.org>
 //! Neural PTP — Kalman-filtered IEEE 1588 clock synchronisation.
 //!
 //! Standard IEEE 1588 PTP achieves ±50–500 µs on BLE mesh links due to

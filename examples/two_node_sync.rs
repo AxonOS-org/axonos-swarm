@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0 OR MIT
+// SPDX-FileCopyrightText: 2026 Denis Yermakou <connect@axonos.org>
 //! Two-node synchronisation example.
 //!
 //! Demonstrates the Swarm Real-Time Contract SC2 (synchronised start) and

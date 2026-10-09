@@ -1,7 +1,7 @@
 # axonos-swarm
 
 [![CI](https://github.com/AxonOS-org/axonos-swarm/actions/workflows/ci.yml/badge.svg)](https://github.com/AxonOS-org/axonos-swarm/actions/workflows/ci.yml)
-[![Crate](https://img.shields.io/badge/Crate-v0.2.1-0a4a8f?style=flat-square)](https://github.com/AxonOS-org/axonos-swarm/releases/tag/v0.2.1)
+[![Crate](https://img.shields.io/badge/Crate-v0.2.2-0a4a8f?style=flat-square)](https://github.com/AxonOS-org/axonos-swarm/releases/tag/v0.2.2)
 [![Rust](https://img.shields.io/badge/Rust-no__std-CE422B?style=flat-square&logo=rust&logoColor=white)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/License-Apache--2.0%20OR%20MIT-475569?style=flat-square)](#license)
 [![Status](https://img.shields.io/badge/Status-Pre--certification-475569?style=flat-square)](#repository-status)
@@ -285,6 +285,6 @@ at your option. See [`LICENSE`](./LICENSE) for the full dispatcher and trademark
 
 **The AxonOS Project** &nbsp;·&nbsp; [axonos.org](https://axonos.org) &nbsp;·&nbsp; [connect@axonos.org](mailto:connect@axonos.org) &nbsp;·&nbsp; [security@axonos.org](mailto:security@axonos.org)
 
-<sub>© 2026 Denis Yermakou · `axonos-swarm` v0.2.1</sub>
+<sub>© 2026 Denis Yermakou · `axonos-swarm` v0.2.2</sub>
 
 </div>

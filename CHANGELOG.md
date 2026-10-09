@@ -6,6 +6,19 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [v0.2.2] — 2026-08-05
+
+Housekeeping release. No source-code or API changes.
+
+### Fixed
+
+- **The lockfile declared the package a version behind its manifest.**
+  `Cargo.lock` and `CITATION.cff` now carry the version `Cargo.toml` states.
+- **`LICENSE` restored as the SPDX `Apache-2.0 OR MIT` dispatcher**, so GitHub
+  detects the licence and the citation.
+
+*This entry was added on 2026-10-09; the release shipped without one.*
+
 ## [v0.2.1] — 2026-05-27
 
 Polish release. No source-code or API changes — v0.2.0 source is preserved

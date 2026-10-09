@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0 OR MIT
+// SPDX-FileCopyrightText: 2026 Denis Yermakou <connect@axonos.org>
 //! Swarm scheduler — synchronised epoch start across N nodes.
 //!
 //! With Neural PTP keeping all nodes' clocks within 18 µs, the scheduler
@@ -13,7 +15,8 @@
 //!
 //! ## Contract SC3 — Intent Co-availability
 //!
-//! Under SC1 (local WCRT ≤ 972 µs) and SC2 (skew ≤ 100 µs), all nodes'
+//! Under SC1 (local WCRT ≤ 972 µs, an assumption until a node's WCRT is
+//! evidenced) and SC2 (skew ≤ 100 µs), all nodes'
 //! intents are ready within ≤ 500 µs of each other.
 //!
 //! ## Reference

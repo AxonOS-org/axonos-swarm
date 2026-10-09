@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0 OR MIT
+// SPDX-FileCopyrightText: 2026 Denis Yermakou <connect@axonos.org>
 //! # axonos-swarm
 //!
 //! Distributed real-time coordination for AxonOS mesh nodes.
@@ -19,7 +21,7 @@
 //! | Clause | Guarantee | Bound |
 //! |--------|-----------|-------|
 //! | SC0 | Clock synchronisation | ≤ 50 µs 3σ between any two nodes |
-//! | SC1 | Local pipeline (inherited from RFC-0004) | WCRT ≤ 972 µs per node |
+//! | SC1 | Local pipeline (inherited from RFC-0004) | WCRT ≤ 972 µs per node (assumed; not yet evidenced) |
 //! | SC2 | Synchronised epoch start | Skew ≤ 2 × σ_sync = 100 µs |
 //! | SC3 | Intent co-availability | All nodes ready within ≤ 500 µs |
 //! | SC4 | Fault detection | Silence / degradation ≤ 8 ms; desync ≤ 100 ms |

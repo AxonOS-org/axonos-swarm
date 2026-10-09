@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0 OR MIT
+// SPDX-FileCopyrightText: 2026 Denis Yermakou <connect@axonos.org>
 //! Swarm fault detector — SC4 distributed health monitoring.
 //!
 //! Detects four failure modes per Article #36:
@@ -20,7 +22,9 @@ use crate::{IntentPacket, NodeId};
 pub const MAX_PEERS: usize = 8;
 
 /// WCRT threshold above which a node is classified as degraded (µs).
-/// SC1 guarantees WCRT ≤ 972 µs; we add 250 µs margin for clock error.
+/// SC1 assumes a local WCRT of at most 972 µs (an RFC-0004 parameter; the
+/// measurement it came from was withdrawn on 2026-10-09 and no node WCRT is
+/// currently claimed). This threshold adds 250 µs margin for clock error.
 pub const DEGRADED_LATENCY_THRESHOLD_US: u64 = 1_200;
 
 /// Number of silent epochs before a node is classified as dead (Type 1 failure).
